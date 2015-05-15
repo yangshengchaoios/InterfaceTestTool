@@ -14,6 +14,12 @@ pod 'MBProgressHUD', :head
 
 pod 'BlocksKit', :head
 
+pod 'CXPhotoBrowser', :head
+
+pod 'HMSegmentedControl', :git => 'https://github.com/yangshengchaoios/HMSegmentedControl.git'
+
+pod 'SMPageControl', :git => 'https://github.com/yangshengchaoios/SMPageControl.git'
+
 pod 'MarqueeLabel', :head
 
 pod 'Reachability', :head

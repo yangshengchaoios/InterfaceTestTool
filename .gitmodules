@@ -1,0 +1,3 @@
+[submodule "InterfaceTestTool/YSCKit"]
+	path = InterfaceTestTool/YSCKit
+	url = https://github.com/yangshengchaoios/YSCKit.git

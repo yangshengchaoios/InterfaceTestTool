@@ -16,8 +16,70 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    NSLog(@"oid=%@", [AppConfigManager sharedInstance].udid);
+#pragma mark --初始化数据库
+    if (![FileUtils isExistsAtPath:DBRealPath]) {
+        [self initDB];
+    }
+    NSLog(@"DBRealPath = %@", DBRealPath);
+
+    [self initAppDefaultUI:@"bg_navigationbar"];
+    
+    //设置程序启动入口界面
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor blackColor];
+    self.window.rootViewController = [self rootViewController];
+    [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+/**
+ *  初始化App默认样式
+ */
+- (void)initAppDefaultUI:(NSString *)navibarImageName {
+    //将状态栏字体改为白色（前提是要设置[View controller-based status bar appearance]为NO）
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    //改变Navibar的颜色和背景图片
+    //	[[UINavigationBar appearance] setBarTintColor:kDefaultNaviBarColor];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:navibarImageName]
+                                       forBarMetrics:UIBarMetricsDefault];
+    //控制返回箭头按钮的颜色
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    
+    //设置Title为白色,Title大小为18
+    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor blackColor],
+                                                            NSFontAttributeName : [UIFont boldSystemFontOfSize:22] }];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+}
+
+#pragma mark - 业务逻辑相关代码
+
+- (void)initDB {
+    // 删除数据库文件
+    [FileUtils deleteFileOrDirectory:DBRealPath];
+    
+    NSString *tablesql_SearchKeyword = @"CREATE TABLE IF NOT EXISTS SearchKeyword (\
+    keyword Varchar(100)  PRIMARY KEY DEFAULT NULL,\
+    startTime Varchar(100) DEFAULT NULL)";
+    [CommonUtils SqliteUpdate:tablesql_SearchKeyword];
+    
+    NSString *tablesql_ProductModel = @"CREATE TABLE IF NOT EXISTS ProductModel (\
+    productId Varchar(100) PRIMARY KEY DEFAULT NULL,\
+    productModel Text DEFAULT NULL,\
+    userId Varchar(100) DEFAULT NULL,\
+    startTime Varchar(100) DEFAULT NULL)";
+    [CommonUtils SqliteUpdate:tablesql_ProductModel];
+}
+
+/**
+ *  初始化RootViewController
+ *
+ *  @return
+ */
+- (UIViewController *)rootViewController {
+    return [UIResponder createBaseViewController:@"ITTMainViewController"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

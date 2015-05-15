@@ -36,12 +36,14 @@ PODS:
   - BlocksKit/UIKit (HEAD based on 2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
+  - CXPhotoBrowser (HEAD based on 1.1.1)
   - FMDB (HEAD based on 2.5):
     - FMDB/standard (= HEAD based on 2.5)
   - FMDB/common (HEAD based on 2.5)
   - FMDB/standard (HEAD based on 2.5):
     - FMDB/common
-  - JSONModel (HEAD based on 1.0.2)
+  - HMSegmentedControl (1.3.0)
+  - JSONModel (HEAD based on 1.1.0)
   - MarqueeLabel (HEAD based on 2.2.3)
   - MBProgressHUD (HEAD based on 0.9.1)
   - pop (1.0.7)
@@ -51,6 +53,7 @@ PODS:
   - SDWebImage (HEAD based on 3.7.2):
     - SDWebImage/Core (= HEAD based on 3.7.2)
   - SDWebImage/Core (HEAD based on 3.7.2)
+  - SMPageControl (1.2)
   - UIImage-Categories (HEAD based on 1.0.0)
   - UIImage-Resize (HEAD based on 1.0.1)
   - ZYQAssetPickerController (1.0.0)
@@ -59,7 +62,9 @@ DEPENDENCIES:
   - ADTransitionController (HEAD)
   - AFNetworking (HEAD)
   - BlocksKit (HEAD)
+  - CXPhotoBrowser (HEAD)
   - FMDB (HEAD)
+  - HMSegmentedControl (from `https://github.com/yangshengchaoios/HMSegmentedControl.git`)
   - JSONModel (HEAD)
   - MarqueeLabel (HEAD)
   - MBProgressHUD (HEAD)
@@ -68,16 +73,33 @@ DEPENDENCIES:
   - Reachability (HEAD)
   - SDURLCache (HEAD)
   - SDWebImage (HEAD)
+  - SMPageControl (from `https://github.com/yangshengchaoios/SMPageControl.git`)
   - UIImage-Categories (HEAD)
   - UIImage-Resize (HEAD)
   - ZYQAssetPickerController (~> 1.0.0)
+
+EXTERNAL SOURCES:
+  HMSegmentedControl:
+    :git: https://github.com/yangshengchaoios/HMSegmentedControl.git
+  SMPageControl:
+    :git: https://github.com/yangshengchaoios/SMPageControl.git
+
+CHECKOUT OPTIONS:
+  HMSegmentedControl:
+    :commit: 1b3bd00fc5d87ed3cde00b69b47acfd6b2929ffd
+    :git: https://github.com/yangshengchaoios/HMSegmentedControl.git
+  SMPageControl:
+    :commit: dce24e6cbd4207f0d5e8b94ab00f769a0efebbf6
+    :git: https://github.com/yangshengchaoios/SMPageControl.git
 
 SPEC CHECKSUMS:
   ADTransitionController: 72299d31488bcbe59fb87c483a89a637ebc819f8
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  CXPhotoBrowser: 33d91a9def828f6fde8cdc03b9f7e6cc7e337ab0
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
-  JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
+  HMSegmentedControl: ea2d0c15ad9812b000874c3a4a51e302d0d082f2
+  JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
   MarqueeLabel: f03d12e3a1572893f78ecb22aa5dd774099c7208
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
@@ -85,8 +107,9 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDURLCache: 8b271cce7263032f6345b6dc838dea23c98844ac
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SMPageControl: 922892813001cfaf059e86e6801f46a967e9ee29
   UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   UIImage-Resize: fa776860f10e6900bbaf53a73e494bdceaaccc77
   ZYQAssetPickerController: e5cf51ee6c05fa06746830026c247cb9f6699e84
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.37.0
