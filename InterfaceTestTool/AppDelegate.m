@@ -16,6 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self testAPI];
     NSLog(@"oid=%@", [AppConfigManager sharedInstance].udid);
 #pragma mark --初始化数据库
     if (![FileUtils isExistsAtPath:DBRealPath]) {
@@ -32,6 +33,20 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)testAPI {
+    [AFNManager requestByUrl:@"http://61.139.124.138:8089//api_punish/public_search_wfxx.php"
+                andDictParam:@{@"hpzl" : @"02",
+                               @"hpzm" : @"AZ09R0",
+                               @"clsbm" : @"G92193"}
+                 requestType:RequestTypeGET
+            requestSuccessed:^(id responseObject) {
+                NSLog(@"response = %@", responseObject);
+            }
+              requestFailure:^(NSInteger errorCode, NSString *errorMessage) {
+                  NSLog(@"errorCode=%ld, errorMsg=%@", errorCode, errorMessage);
+              }];
 }
 
 /**
