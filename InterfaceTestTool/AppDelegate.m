@@ -37,9 +37,11 @@
 
 - (void)testAPI {
     [AFNManager requestByUrl:@"http://61.139.124.138:8089//api_punish/public_search_wfxx.php"
+                     withAPI:nil
                 andDictParam:@{@"hpzl" : @"02",
                                @"hpzm" : @"AZ09R0",
                                @"clsbm" : @"G92193"}
+            customModelClass:nil
                  requestType:RequestTypeGET
             requestSuccessed:^(id responseObject) {
                 NSLog(@"response = %@", responseObject);
