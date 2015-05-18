@@ -55,27 +55,6 @@
                     NSLog(@"errorMessage = %@", errorMessage);
                 }];
 }
-/**
- *  更新购物车数量
- */
-- (void)refreshShoppingCartProducts {
-    WeakSelfType blockSelf = self;
-    [AFNManager getDataWithAPI:kResPathAppShoppingCartOfProducts
-                  andDictParam:@{kParamToken : TOKEN}
-                     modelName:ClassOfObject(ShoppingCartModel)
-              requestSuccessed:^(id responseObject) {
-                  if ([responseObject isKindOfClass:[NSArray class]]) {
-                      NSInteger count = 0;
-                      for (ShoppingCartModel *shoppingCart in responseObject) {
-                          count += [shoppingCart.shoppingCartProducts count];
-                      }
-                      blockSelf.shoppingCartProductCount = count;
-                  }
-              }
-                requestFailure:^(NSInteger errorCode, NSString *errorMessage) {
-                    
-                }];
-}
 
 #pragma mark - 用户登录/重新登录/退出登录
 
@@ -224,7 +203,6 @@
                    }
                    else {
                        [[StorageManager sharedInstance] setConfigValue:Trim(userModel.token) forKey:kCachedUserToken];//NOTE:只有登录才返回token
-                       blockSelf.shoppingCartProductCount = userModel.shoppingCartProductCount;
                        [blockSelf resetUser:userModel];
                        [blockSelf loginSucceeded];
                        [MobClick event:UMEventKeyLoginSuccess];
@@ -280,7 +258,6 @@
     [[StorageManager sharedInstance] setUserId:userModel.userId];
     self.user = [[StorageManager sharedInstance] configValueForKey:kCachedUserModel];
     self.isUserChanged = YES;   //用于触发观察者的block回调
-    //    [self refreshShoppingCartProducts];//触发购物车商品数量的改变
 }
 
 - (void)loginSucceeded {

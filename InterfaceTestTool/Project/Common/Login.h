@@ -27,7 +27,6 @@ typedef void(^LoginFailedWithError)(NSString *errorMessage);
 - (BOOL)isLogged;                   //判断是否登录了
 - (void)clearLoginData;
 - (void)resetUser:(UserModel *)userModel;
-- (void)refreshShoppingCartProducts;
 
 // email+手机号登录
 - (void)loginWithAccountName:(NSString *)userId
