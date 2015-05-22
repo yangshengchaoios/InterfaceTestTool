@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
+
+#include <math.h>
+//#import "MobileWiFi.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +20,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self testAPI];
+//    [self testAPI];
+//    [self fetchSSIDInfo];
+//    [self testMobileWifiFramework];
+//    NSBundle *b = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/MobileWiFi.framework"];
+//    NSLog(@"b=%@",b);
+//    BOOL isLoaded = [b load];
+//    
+//    NSString *path = [FileUtils DirectoryPathOfDocuments];
+//    NSLog(@"path=%@", path);
+//    NSArray *allPath = [FileUtils allPathsInDirectoryPath:@"/System/Library/PrivateFrameworks/"];
+//    NSLog(@"allpath=%@", allPath);
+////    allPathsInDirectoryPath
+//    BOOL success = [b load];
+//    Class FTDeviceSupport = NSClassFromString(@"FTDeviceSupport");
+//    id si = [FTDeviceSupport valueForKey:@"sharedInstance"];
+    NSLog(@"path=%@",DBRealPath);
     NSLog(@"oid=%@", [AppConfigManager sharedInstance].udid);
 #pragma mark --初始化数据库
     if (![FileUtils isExistsAtPath:DBRealPath]) {
@@ -33,6 +52,57 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+//测试私有framework
+- (void)testMobileWifiFramework {
+//    WiFiManagerRef manager = WiFiManagerClientCreate(kCFAllocatorDefault, 0);
+//    CFArrayRef devices = WiFiManagerClientCopyDevices(manager);
+//    
+//    WiFiDeviceClientRef client = (WiFiDeviceClientRef)CFArrayGetValueAtIndex(devices, 0);
+//    CFDictionaryRef data = (CFDictionaryRef)WiFiDeviceClientCopyProperty(client, CFSTR("RSSI"));
+//    CFNumberRef scaled = (CFNumberRef)WiFiDeviceClientCopyProperty(client, kWiFiScaledRSSIKey);
+//    
+//    CFNumberRef RSSI = (CFNumberRef)CFDictionaryGetValue(data, CFSTR("RSSI_CTL_AGR"));
+//    
+//    int raw;
+//    CFNumberGetValue(RSSI, kCFNumberIntType, &raw);
+//    
+//    float strength;
+//    CFNumberGetValue(scaled, kCFNumberFloatType, &strength);
+//    CFRelease(scaled);
+//    
+//    strength *= -1;
+//    
+//    // Apple uses -3.0.
+//    int bars = (int)ceilf(strength * -3.0f);
+//    bars = MAX(1, MIN(bars, 3));
+//    
+//    
+//    printf("WiFi signal strength: %d dBm\n\t Bars: %d\n", raw,  bars);
+//    
+//    CFRelease(data);
+//    CFRelease(scaled);
+//    CFRelease(devices);
+//    CFRelease(manager);
+}
+
+//只能扫描当前已连接的wifi信息
+- (NSDictionary *)fetchSSIDInfo {
+    NSArray *interfaceNames = CFBridgingRelease(CNCopySupportedInterfaces());
+    NSLog(@"%s: Supported interfaces: %@", __func__, interfaceNames);
+    
+    NSDictionary *SSIDInfo;
+    for (NSString *interfaceName in interfaceNames) {
+        SSIDInfo = CFBridgingRelease(CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName));
+        NSLog(@"%s: %@ => %@", __func__, interfaceName, SSIDInfo);
+        
+//        BOOL isNotEmpty = (SSIDInfo.count > 0);
+//        if (isNotEmpty) {
+//            break;
+//        }
+    }
+    return SSIDInfo;
 }
 
 - (void)testAPI {

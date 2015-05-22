@@ -596,6 +596,9 @@
 		D384C1271B05DDC900FB5972 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		D384C1291B05DDD000FB5972 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		D3A2F60110072CA76D6E5711 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3BE46021B0DBD2500ABE52E /* WiFiDeviceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiDeviceClient.h; sourceTree = "<group>"; };
+		D3BE46031B0DBD2500ABE52E /* WiFiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiManager.h; sourceTree = "<group>"; };
+		D3BE46041B0DBD2500ABE52E /* WiFiNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiNetwork.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -681,6 +684,9 @@
 			children = (
 				7E6D3C241AEDF5DB0086C2FB /* AppDelegate.h */,
 				7E6D3C251AEDF5DB0086C2FB /* AppDelegate.m */,
+				D3BE46021B0DBD2500ABE52E /* WiFiDeviceClient.h */,
+				D3BE46031B0DBD2500ABE52E /* WiFiManager.h */,
+				D3BE46041B0DBD2500ABE52E /* WiFiNetwork.h */,
 				D384BFE71B05CED100FB5972 /* YSCKit-Prefix.pch */,
 				7E6D3C2D1AEDF5DB0086C2FB /* Images.xcassets */,
 				D384BE901B05CED100FB5972 /* Project */,
@@ -1611,7 +1617,7 @@
 				TargetAttributes = {
 					7E6D3C1C1AEDF5DB0086C2FB = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = Z5LUTWQ9XA;
+						DevelopmentTeam = 8KJ39GMSD5;
 					};
 					7E6D3C351AEDF5DB0086C2FB = {
 						CreatedOnToolsVersion = 6.3;
@@ -2012,7 +2018,7 @@
 			baseConfigurationReference = C6B7B47E6FE29CEF364AB720 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xiaoyong zheng (C826AW87D9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deng Liuyan (6T6YLHUK67)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/InterfaceTestTool/Project/External/UMeng/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -2032,8 +2038,8 @@
 					"$(PROJECT_DIR)/InterfaceTestTool/Project/External/UMeng/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "be1f4bab-722f-4a38-bb4c-acbf96e3eae4";
-				TARGETED_DEVICE_FAMILY = 2;
+				PROVISIONING_PROFILE = "962987d7-3ba2-4426-b354-bd06d5ca5d22";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2042,7 +2048,7 @@
 			baseConfigurationReference = 559D32AC2853025B00200A2A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xiaoyong zheng (C826AW87D9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deng Liuyan (6T6YLHUK67)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/InterfaceTestTool/Project/External/UMeng/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -2062,8 +2068,8 @@
 					"$(PROJECT_DIR)/InterfaceTestTool/Project/External/UMeng/UMSocial_Sdk/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "be1f4bab-722f-4a38-bb4c-acbf96e3eae4";
-				TARGETED_DEVICE_FAMILY = 2;
+				PROVISIONING_PROFILE = "962987d7-3ba2-4426-b354-bd06d5ca5d22";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
