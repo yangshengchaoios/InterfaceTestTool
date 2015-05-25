@@ -8,9 +8,7 @@
 
 #import "AppDelegate.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
-
 #include <math.h>
-//#import "MobileWiFi.h"
 
 @interface AppDelegate ()
 
@@ -20,30 +18,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    [self testAPI];
-//    [self fetchSSIDInfo];
-//    [self testMobileWifiFramework];
-//    NSBundle *b = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/MobileWiFi.framework"];
-//    NSLog(@"b=%@",b);
-//    BOOL isLoaded = [b load];
-//    
-//    NSString *path = [FileUtils DirectoryPathOfDocuments];
-//    NSLog(@"path=%@", path);
-//    NSArray *allPath = [FileUtils allPathsInDirectoryPath:@"/System/Library/PrivateFrameworks/"];
-//    NSLog(@"allpath=%@", allPath);
-////    allPathsInDirectoryPath
-//    BOOL success = [b load];
-//    Class FTDeviceSupport = NSClassFromString(@"FTDeviceSupport");
-//    id si = [FTDeviceSupport valueForKey:@"sharedInstance"];
-    NSLog(@"path=%@",DBRealPath);
-    NSLog(@"oid=%@", [AppConfigManager sharedInstance].udid);
-#pragma mark --初始化数据库
-    if (![FileUtils isExistsAtPath:DBRealPath]) {
+    if (NO == [FileUtils isExistsAtPath:DBRealPath]) {
         [self initDB];
     }
-    NSLog(@"DBRealPath = %@", DBRealPath);
+    NSLog(@"DBRealPath = %@, autoscale=%f", DBRealPath, AUTOLAYOUT_SCALE);
 
     [self initAppDefaultUI:@"bg_navigationbar"];
+    [[ITTManager sharedInstance] refreshInterfaceGroups];
     
     //设置程序启动入口界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -52,57 +33,6 @@
     [self.window makeKeyAndVisible];
     
     return YES;
-}
-
-//测试私有framework
-- (void)testMobileWifiFramework {
-//    WiFiManagerRef manager = WiFiManagerClientCreate(kCFAllocatorDefault, 0);
-//    CFArrayRef devices = WiFiManagerClientCopyDevices(manager);
-//    
-//    WiFiDeviceClientRef client = (WiFiDeviceClientRef)CFArrayGetValueAtIndex(devices, 0);
-//    CFDictionaryRef data = (CFDictionaryRef)WiFiDeviceClientCopyProperty(client, CFSTR("RSSI"));
-//    CFNumberRef scaled = (CFNumberRef)WiFiDeviceClientCopyProperty(client, kWiFiScaledRSSIKey);
-//    
-//    CFNumberRef RSSI = (CFNumberRef)CFDictionaryGetValue(data, CFSTR("RSSI_CTL_AGR"));
-//    
-//    int raw;
-//    CFNumberGetValue(RSSI, kCFNumberIntType, &raw);
-//    
-//    float strength;
-//    CFNumberGetValue(scaled, kCFNumberFloatType, &strength);
-//    CFRelease(scaled);
-//    
-//    strength *= -1;
-//    
-//    // Apple uses -3.0.
-//    int bars = (int)ceilf(strength * -3.0f);
-//    bars = MAX(1, MIN(bars, 3));
-//    
-//    
-//    printf("WiFi signal strength: %d dBm\n\t Bars: %d\n", raw,  bars);
-//    
-//    CFRelease(data);
-//    CFRelease(scaled);
-//    CFRelease(devices);
-//    CFRelease(manager);
-}
-
-//只能扫描当前已连接的wifi信息
-- (NSDictionary *)fetchSSIDInfo {
-    NSArray *interfaceNames = CFBridgingRelease(CNCopySupportedInterfaces());
-    NSLog(@"%s: Supported interfaces: %@", __func__, interfaceNames);
-    
-    NSDictionary *SSIDInfo;
-    for (NSString *interfaceName in interfaceNames) {
-        SSIDInfo = CFBridgingRelease(CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName));
-        NSLog(@"%s: %@ => %@", __func__, interfaceName, SSIDInfo);
-        
-//        BOOL isNotEmpty = (SSIDInfo.count > 0);
-//        if (isNotEmpty) {
-//            break;
-//        }
-    }
-    return SSIDInfo;
 }
 
 - (void)testAPI {
@@ -118,7 +48,7 @@
                 NSLog(@"response = %@", listModel.list);
             }
               requestFailure:^(NSInteger errorCode, NSString *errorMessage) {
-                  NSLog(@"errorCode=%ld, errorMsg=%@", errorCode, errorMessage);
+                  NSLog(@"errorCode=%ld, errorMsg=%@", (long)errorCode, errorMessage);
               }];
 }
 
@@ -126,7 +56,7 @@
  *  初始化App默认样式
  */
 - (void)initAppDefaultUI:(NSString *)navibarImageName {
-    //将状态栏字体改为白色（前提是要设置[View controller-based status bar appearance]为NO）
+    //修改状态栏字体颜色（前提是要设置[View controller-based status bar appearance]为NO）
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     //改变Navibar的颜色和背景图片
@@ -147,18 +77,41 @@
 - (void)initDB {
     // 删除数据库文件
     [FileUtils deleteFileOrDirectory:DBRealPath];
-    
-    NSString *tablesql_SearchKeyword = @"CREATE TABLE IF NOT EXISTS SearchKeyword (\
-    keyword Varchar(100)  PRIMARY KEY DEFAULT NULL,\
-    startTime Varchar(100) DEFAULT NULL)";
-    [CommonUtils SqliteUpdate:tablesql_SearchKeyword];
-    
-    NSString *tablesql_ProductModel = @"CREATE TABLE IF NOT EXISTS ProductModel (\
-    productId Varchar(100) PRIMARY KEY DEFAULT NULL,\
-    productModel Text DEFAULT NULL,\
-    userId Varchar(100) DEFAULT NULL,\
-    startTime Varchar(100) DEFAULT NULL)";
-    [CommonUtils SqliteUpdate:tablesql_ProductModel];
+    //接口分组管理
+    NSString *tablesql_interface_group = @"CREATE TABLE IF NOT EXISTS interface_group (\
+    groupId INTEGER PRIMARY KEY AUTOINCREMENT,\
+    groupName Text DEFAULT NULL,\
+    sequenceId Integer DEFAULT 0)";
+    [CommonUtils SqliteUpdate:tablesql_interface_group];
+    //接口定义
+    NSString *tablesql_Interface = @"CREATE TABLE IF NOT EXISTS interface (\
+    interfaceId INTEGER PRIMARY KEY AUTOINCREMENT,\
+    groupId Integer DEFAULT 0,\
+    interfaceName Text DEFAULT NULL,\
+    interfacePrefixUrl Text DEFAULT NULL,\
+    interfacePath Text DEFAULT NULL,\
+    interfaceRemark Text DEFAULT NULL,\
+    interfaceRequestType Integer DEFAULT 0,\
+    interfaceStatus Integer DEFAULT 0,\
+    sequenceId Integer DEFAULT 0,\
+    totalCaseNumber Integer DEFAULT 0,\
+    successCaseNumber Integer DEFAULT 0,\
+    partialCaseNumber Integer DEFAULT 0,\
+    errorCaseNumber Integer DEFAULT 0)";
+    [CommonUtils SqliteUpdate:tablesql_Interface];
+    //测试用例
+    NSString *tablesql_TestCase = @"CREATE TABLE IF NOT EXISTS test_case (\
+    caseId INTEGER PRIMARY KEY AUTOINCREMENT,\
+    interfaceId Integer DEFAULT 0,\
+    caseInput Text DEFAULT NULL,\
+    caseOutput Text DEFAULT NULL,\
+    caseOutputStd Text DEFAULT NULL,\
+    caseOutputType Integer DEFAULT 0,\
+    caseOutputModel Varchar(100) DEFAULT NULL,\
+    sequenceId Integer DEFAULT 0,\
+    caseStatus Integer DEFAULT 0,\
+    spendTime Integer DEFAULT 0)";
+    [CommonUtils SqliteUpdate:tablesql_TestCase];
 }
 
 /**
@@ -167,7 +120,7 @@
  *  @return
  */
 - (UIViewController *)rootViewController {
-    return [UIResponder createBaseViewController:@"ITTMainViewController"];
+    return [[UINavigationController alloc] initWithRootViewController:[UIResponder createBaseViewController:@"ITTMainViewController"]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

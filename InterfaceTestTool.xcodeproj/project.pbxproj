@@ -226,6 +226,16 @@
 		D384C1261B05DDC200FB5972 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D384C1251B05DDC200FB5972 /* libsqlite3.dylib */; };
 		D384C1281B05DDC900FB5972 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D384C1271B05DDC900FB5972 /* libstdc++.dylib */; };
 		D384C12A1B05DDD000FB5972 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D384C1291B05DDD000FB5972 /* libiconv.dylib */; };
+		D3913ABC1B12C6A100BC3134 /* bg_navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3913ABB1B12C6A100BC3134 /* bg_navigationbar@2x.png */; };
+		D3913AC01B12C86600BC3134 /* ITTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3913ABE1B12C86600BC3134 /* ITTDetailViewController.m */; };
+		D3913AC11B12C86600BC3134 /* ITTDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3913ABF1B12C86600BC3134 /* ITTDetailViewController.xib */; };
+		D3913AC51B12C8B300BC3134 /* ITTMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3913AC31B12C8B300BC3134 /* ITTMainTableViewCell.m */; };
+		D3913AC61B12C8B300BC3134 /* ITTMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3913AC41B12C8B300BC3134 /* ITTMainTableViewCell.xib */; };
+		D3913AC91B12D7D700BC3134 /* ITTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3913AC81B12D7D700BC3134 /* ITTModel.m */; };
+		D3913ACC1B130A1300BC3134 /* ITTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3913ACB1B130A1300BC3134 /* ITTManager.m */; };
+		D3913AD31B131F6200BC3134 /* arrow_left_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3913AD21B131F6200BC3134 /* arrow_left_dark@2x.png */; };
+		D3D74A511B133B5F0078BD40 /* ITTDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D74A4F1B133B5F0078BD40 /* ITTDetailTableViewCell.m */; };
+		D3D74A521B133B5F0078BD40 /* ITTDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3D74A501B133B5F0078BD40 /* ITTDetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -595,10 +605,22 @@
 		D384C1251B05DDC200FB5972 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D384C1271B05DDC900FB5972 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		D384C1291B05DDD000FB5972 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		D3913ABB1B12C6A100BC3134 /* bg_navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_navigationbar@2x.png"; sourceTree = "<group>"; };
+		D3913ABD1B12C86600BC3134 /* ITTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTDetailViewController.h; sourceTree = "<group>"; };
+		D3913ABE1B12C86600BC3134 /* ITTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTDetailViewController.m; sourceTree = "<group>"; };
+		D3913ABF1B12C86600BC3134 /* ITTDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITTDetailViewController.xib; sourceTree = "<group>"; };
+		D3913AC21B12C8B300BC3134 /* ITTMainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTMainTableViewCell.h; sourceTree = "<group>"; };
+		D3913AC31B12C8B300BC3134 /* ITTMainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTMainTableViewCell.m; sourceTree = "<group>"; };
+		D3913AC41B12C8B300BC3134 /* ITTMainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITTMainTableViewCell.xib; sourceTree = "<group>"; };
+		D3913AC71B12D7D700BC3134 /* ITTModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTModel.h; sourceTree = "<group>"; };
+		D3913AC81B12D7D700BC3134 /* ITTModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTModel.m; sourceTree = "<group>"; };
+		D3913ACA1B130A1300BC3134 /* ITTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTManager.h; sourceTree = "<group>"; };
+		D3913ACB1B130A1300BC3134 /* ITTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTManager.m; sourceTree = "<group>"; };
+		D3913AD21B131F6200BC3134 /* arrow_left_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_left_dark@2x.png"; sourceTree = "<group>"; };
 		D3A2F60110072CA76D6E5711 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3BE46021B0DBD2500ABE52E /* WiFiDeviceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiDeviceClient.h; sourceTree = "<group>"; };
-		D3BE46031B0DBD2500ABE52E /* WiFiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiManager.h; sourceTree = "<group>"; };
-		D3BE46041B0DBD2500ABE52E /* WiFiNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiNetwork.h; sourceTree = "<group>"; };
+		D3D74A4E1B133B5F0078BD40 /* ITTDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTDetailTableViewCell.h; sourceTree = "<group>"; };
+		D3D74A4F1B133B5F0078BD40 /* ITTDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTDetailTableViewCell.m; sourceTree = "<group>"; };
+		D3D74A501B133B5F0078BD40 /* ITTDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITTDetailTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,9 +706,6 @@
 			children = (
 				7E6D3C241AEDF5DB0086C2FB /* AppDelegate.h */,
 				7E6D3C251AEDF5DB0086C2FB /* AppDelegate.m */,
-				D3BE46021B0DBD2500ABE52E /* WiFiDeviceClient.h */,
-				D3BE46031B0DBD2500ABE52E /* WiFiManager.h */,
-				D3BE46041B0DBD2500ABE52E /* WiFiNetwork.h */,
 				D384BFE71B05CED100FB5972 /* YSCKit-Prefix.pch */,
 				7E6D3C2D1AEDF5DB0086C2FB /* Images.xcassets */,
 				D384BE901B05CED100FB5972 /* Project */,
@@ -749,6 +768,8 @@
 			children = (
 				D384C0FC1B05D58F00FB5972 /* Login.h */,
 				D384C0FD1B05D58F00FB5972 /* Login.m */,
+				D3913ACA1B130A1300BC3134 /* ITTManager.h */,
+				D3913ACB1B130A1300BC3134 /* ITTManager.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -771,6 +792,8 @@
 				D384BEA21B05CED100FB5972 /* DataModel.m */,
 				D384BEA31B05CED100FB5972 /* RegionModel.h */,
 				D384BEA41B05CED100FB5972 /* RegionModel.m */,
+				D3913AC71B12D7D700BC3134 /* ITTModel.h */,
+				D3913AC81B12D7D700BC3134 /* ITTModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1357,6 +1380,8 @@
 		D384C0A31B05CF4E00FB5972 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				D3913AD21B131F6200BC3134 /* arrow_left_dark@2x.png */,
+				D3913ABB1B12C6A100BC3134 /* bg_navigationbar@2x.png */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1385,6 +1410,12 @@
 		D384C0A71B05D1C800FB5972 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				D3913ABD1B12C86600BC3134 /* ITTDetailViewController.h */,
+				D3913ABE1B12C86600BC3134 /* ITTDetailViewController.m */,
+				D3913ABF1B12C86600BC3134 /* ITTDetailViewController.xib */,
+				D3D74A4E1B133B5F0078BD40 /* ITTDetailTableViewCell.h */,
+				D3D74A4F1B133B5F0078BD40 /* ITTDetailTableViewCell.m */,
+				D3D74A501B133B5F0078BD40 /* ITTDetailTableViewCell.xib */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -1395,6 +1426,9 @@
 				D384C0AA1B05D2D000FB5972 /* ITTMainViewController.h */,
 				D384C0AB1B05D2D000FB5972 /* ITTMainViewController.m */,
 				D384C0AC1B05D2D000FB5972 /* ITTMainViewController.xib */,
+				D3913AC21B12C8B300BC3134 /* ITTMainTableViewCell.h */,
+				D3913AC31B12C8B300BC3134 /* ITTMainTableViewCell.m */,
+				D3913AC41B12C8B300BC3134 /* ITTMainTableViewCell.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1665,6 +1699,7 @@
 				D384C0611B05CED100FB5972 /* ZSSstrikethrough@2x.png in Resources */,
 				D384C0501B05CED100FB5972 /* ZSSlink.png in Resources */,
 				D384C0F11B05D53000FB5972 /* UMShareEditViewControlleriPad.xib in Resources */,
+				D3913AC11B12C86600BC3134 /* ITTDetailViewController.xib in Resources */,
 				D384C0651B05CED100FB5972 /* ZSSsuperscript@2x.png in Resources */,
 				D384C0721B05CED100FB5972 /* ZSSviewsource@2x.png in Resources */,
 				D384C0401B05CED100FB5972 /* ZSSh6.png in Resources */,
@@ -1680,14 +1715,17 @@
 				D384C0481B05CED100FB5972 /* ZSSinsertkeyword.png in Resources */,
 				D384C0441B05CED100FB5972 /* ZSSimage.png in Resources */,
 				D384C0331B05CED100FB5972 /* ZSSclearstyle@2x.png in Resources */,
+				D3913AD31B131F6200BC3134 /* arrow_left_dark@2x.png in Resources */,
 				D384C0341B05CED100FB5972 /* ZSSforcejustify.png in Resources */,
 				D384C0371B05CED100FB5972 /* ZSSh1@2x.png in Resources */,
+				D3D74A521B133B5F0078BD40 /* ITTDetailTableViewCell.xib in Resources */,
 				D384C0ED1B05D53000FB5972 /* UMSCommentDetailController.xib in Resources */,
 				D384C04D1B05CED100FB5972 /* ZSSkeyboard@2x.png in Resources */,
 				D384C0F01B05D53000FB5972 /* UMShareEditViewController.xib in Resources */,
 				D384C0421B05CED100FB5972 /* ZSShorizontalrule.png in Resources */,
 				D384C09E1B05CED100FB5972 /* YSCTableViewCell.xib in Resources */,
 				D384C0671B05CED100FB5972 /* ZSStable@2x.png in Resources */,
+				D3913AC61B12C8B300BC3134 /* ITTMainTableViewCell.xib in Resources */,
 				D384C0F51B05D53000FB5972 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D384C0711B05CED100FB5972 /* ZSSviewsource.png in Resources */,
 				D384C0301B05CED100FB5972 /* ZSScenterjustify.png in Resources */,
@@ -1695,6 +1733,7 @@
 				D384C03C1B05CED100FB5972 /* ZSSh4.png in Resources */,
 				D384C0F21B05D53000FB5972 /* UMSLoginViewController.xib in Resources */,
 				D384C0731B05CED100FB5972 /* ZSSRichTextEditor.js in Resources */,
+				D3913ABC1B12C6A100BC3134 /* bg_navigationbar@2x.png in Resources */,
 				D384C06A1B05CED100FB5972 /* ZSSunderline.png in Resources */,
 				D384C04A1B05CED100FB5972 /* ZSSitalic.png in Resources */,
 				D384C05C1B05CED100FB5972 /* ZSSredo.png in Resources */,
@@ -1809,12 +1848,14 @@
 				D384C0171B05CED100FB5972 /* TCBlobDownloader.m in Sources */,
 				D384BFF51B05CED100FB5972 /* NSObject+Addition.m in Sources */,
 				D384BFFA1B05CED100FB5972 /* UIImage+Additions.m in Sources */,
+				D3913ACC1B130A1300BC3134 /* ITTManager.m in Sources */,
 				D384C0261B05CED100FB5972 /* XHCacheManager.m in Sources */,
 				D384C01C1B05CED100FB5972 /* TPKeyboardAvoidingTableView.m in Sources */,
 				D384C0841B05CED100FB5972 /* DownloadManager.m in Sources */,
 				D384C01B1B05CED100FB5972 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				D384C0041B05CED100FB5972 /* UIViewController+ScrollingNavbar.m in Sources */,
 				D384C00E1B05CED100FB5972 /* UIScrollView+MJExtension.m in Sources */,
+				D3D74A511B133B5F0078BD40 /* ITTDetailTableViewCell.m in Sources */,
 				D384C0051B05CED100FB5972 /* CCMBorderView.m in Sources */,
 				D384C0181B05CED100FB5972 /* TCBlobDownloadManager.m in Sources */,
 				D384C0221B05CED100FB5972 /* WebViewJavascriptBridge.m in Sources */,
@@ -1825,6 +1866,7 @@
 				D384BFF31B05CED100FB5972 /* NSDate+Additions.m in Sources */,
 				D384C1111B05D67200FB5972 /* BaseCollectionViewCell.m in Sources */,
 				D384C0821B05CED100FB5972 /* AFNManager.m in Sources */,
+				D3913AC91B12D7D700BC3134 /* ITTModel.m in Sources */,
 				D384C0901B05CED100FB5972 /* ImageUtils.m in Sources */,
 				D384C02A1B05CED100FB5972 /* XHZoomingImageView.m in Sources */,
 				D384C0991B05CED100FB5972 /* InfiniteLoopView.m in Sources */,
@@ -1841,6 +1883,7 @@
 				D384C0251B05CED100FB5972 /* UIImageView+XHURLDownload.m in Sources */,
 				D384BFF21B05CED100FB5972 /* NSAttributedString+EmojiAttributedString.m in Sources */,
 				D384C0101B05CED100FB5972 /* UIView+MJExtension.m in Sources */,
+				D3913AC01B12C86600BC3134 /* ITTDetailViewController.m in Sources */,
 				D384BFF71B05CED100FB5972 /* NSTimer+Addition.m in Sources */,
 				D384C01A1B05CED100FB5972 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				D384C0851B05CED100FB5972 /* LogManager.m in Sources */,
@@ -1863,6 +1906,7 @@
 				D384C08C1B05CED100FB5972 /* BaseModel.m in Sources */,
 				D384C1131B05D67200FB5972 /* YSCKTipsView.m in Sources */,
 				D384C0931B05CED100FB5972 /* BasePullToRefreshTableViewController.m in Sources */,
+				D3913AC51B12C8B300BC3134 /* ITTMainTableViewCell.m in Sources */,
 				D384C0781B05CED100FB5972 /* HRBrightnessCursor.m in Sources */,
 				D384BFFE1B05CED100FB5972 /* UIScrollView+Additions.m in Sources */,
 				D384C0001B05CED100FB5972 /* UIView+Addition.m in Sources */,
@@ -2039,7 +2083,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "962987d7-3ba2-4426-b354-bd06d5ca5d22";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -2069,7 +2113,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "962987d7-3ba2-4426-b354-bd06d5ca5d22";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

@@ -10,6 +10,9 @@
 #ifndef YSCKit_Constants_h
 #define YSCKit_Constants_h
 
+#import "ITTModel.h"
+#import "ITTManager.h"
+
 typedef void (^CallBackBlock)();
 typedef void (^CallBackWithResponseBlock)(id response);
 
@@ -53,7 +56,7 @@ typedef void (^CallBackWithResponseBlock)(id response);
 #define TITLEBAR_HEIGHT         64.0f       //等于STATUSBAR_HEIGHT + NAVIGATIONBAR_HEIGHT
 #define TABBAR_HEIGHT           49.0f
 #define KEYBOARD_HEIGHT         216.0f      //默认键盘高度
-#define XIB_WIDTH               640.0f      //xib布局时的宽度(point)，主要用于计算缩放比例
+#define XIB_WIDTH               768.0f      //xib布局时的宽度(point)，主要用于计算缩放比例
 
 
 /**
@@ -85,7 +88,7 @@ typedef void (^CallBackWithResponseBlock)(id response);
 #define DefaultImage                    [UIImage imageNamed:@"default_image"]
 #define GenderMaleImage                 [UIImage imageNamed:@"icon_gender_male"]
 #define GenderFemaleImage               [UIImage imageNamed:@"icon_gender_female"]
-#define DefaultNaviBarArrowBackImage    [UIImage imageNamed:@"arrow_left_black33x57"]                  //BaseViewController里设置push和present出来的返回按钮图片
+#define DefaultNaviBarArrowBackImage    [UIImage imageNamed:@"arrow_left_dark"]                  //BaseViewController里设置push和present出来的返回按钮图片
 #define PresentNaviBarImage             [UIImage imageNamed:@"bg_navigationbar"]    //BaseViewController里设置prsent出来的navibar背景图片
 #define PresentNaviBackColor            [UIColor blackColor]            //定义BaseViewController里设置prsent出来的navibar返回箭头颜色
 #define PresentNaviTitleColor           [UIColor blackColor]            //定义BaseViewController里设置prsent出来的navibar标题文字颜色
