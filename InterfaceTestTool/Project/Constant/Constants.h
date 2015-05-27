@@ -98,6 +98,8 @@ typedef void (^CallBackWithResponseBlock)(id response);
 #define ReturnYESWhenObjectIsEmpty(object)          if ([NSObject isEmpty:object]) { return YES; }
 #define ReturnNOWhenObjectIsEmpty(object)           if ([NSObject isEmpty:object]) { return NO;  }
 #define ReturnZeroWhenObjectIsEmpty(object)         if ([NSObject isEmpty:object]) { return 0;  }
+#define CheckIfEmpty(string,errmsg)                 if ([NSString isEmpty:(string)]) {[UIView showResultThenHideOnWindow:(errmsg)];return;}
+#define CheckIfMatchRegex(regex,string,errmsg)      if ([NSString isMatchRegex:(regex) withString:(string))]) {[UIView showResultThenHideOnWindow:(errmsg)];return;}
 #define Trim(x)                         [NSString trimString:x]
 #define ClassOfObject(x)                [x class]
 #define RandomInt(from,to)              ((int)((from) + arc4random() % ((to)-(from) + 1)))  //随机数 [from,to] 之间

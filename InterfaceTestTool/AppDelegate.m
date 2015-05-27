@@ -18,13 +18,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    [self initDB];
     if (NO == [FileUtils isExistsAtPath:DBRealPath]) {
         [self initDB];
     }
     NSLog(@"DBRealPath = %@, autoscale=%f", DBRealPath, AUTOLAYOUT_SCALE);
 
     [self initAppDefaultUI:@"bg_navigationbar"];
-    [[ITTManager sharedInstance] refreshInterfaceGroups];
     
     //设置程序启动入口界面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -8,6 +8,7 @@
 
 #import "ITTMainViewController.h"
 #import "ITTMainTableViewCell.h"
+#import "MJRefresh.h"
 
 @interface ITTMainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -15,28 +16,31 @@
 
 @implementation ITTMainViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"接口列表";
+    WeakSelfType blockSelf = self;
     
     [self.tableView registerNib:[ITTMainTableViewCell NibNameOfCell] forCellReuseIdentifier:kCellIdentifier];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0.01)];
+//    self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor blueColor];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:[self edgeInsetsOfCellSeperator]];
     }
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [self.tableView setLayoutMargins:[self edgeInsetsOfCellSeperator]];
     }
+    [self.tableView addHeaderWithCallback:^{
+        [[ITTManager sharedInstance] refreshInterfaceGroups];
+        [[ITTManager sharedInstance] refreshInterfaces];
+        [blockSelf.tableView reloadData];
+    }];
+    [self.tableView headerBeginRefreshing];
     
-    WeakSelfType blockSelf = self;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"添加" style:UIBarButtonItemStyleBordered handler:^(id sender) {
         [blockSelf pushViewController:@"ITTDetailViewController" withParams:@{kParamTitle : @"添加接口", kParamType : kParamAdd}];
     }];
@@ -48,18 +52,14 @@
 }
 
 #pragma mark - UITableViewDataSource
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
     return [[ITTManager sharedInstance].interfaceGroupArray count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
     InterfaceGroupModel *groupModel = [ITTManager sharedInstance].interfaceGroupArray[section];
     return [groupModel.interfaceArray count];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [NSString stringWithFormat:@"\tsection_%ld", section];
     InterfaceGroupModel *groupModel = [ITTManager sharedInstance].interfaceGroupArray[section];
     return groupModel.groupName;
 }
@@ -71,8 +71,8 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ITTMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-//    InterfaceGroupModel *groupModel = [ITTManager sharedInstance].interfaceGroupArray[indexPath.section];
-//    [cell layoutDataModel:groupModel.interfaceArray[indexPath.row]];
+    InterfaceGroupModel *groupModel = [ITTManager sharedInstance].interfaceGroupArray[indexPath.section];
+    [cell layoutDataModel:groupModel.interfaceArray[indexPath.row]];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

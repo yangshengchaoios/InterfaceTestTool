@@ -14,5 +14,6 @@
 
 + (instancetype)sharedInstance;
 - (void)refreshInterfaceGroups;
+- (void)refreshInterfaces;
 
 @end

@@ -39,6 +39,7 @@
             InterfaceModel *dataModel = [InterfaceModel new];
             dataModel.interfaceId = [resultSet intForColumn:@"interfaceId"];
             dataModel.groupId = [resultSet intForColumn:@"groupId"];
+            dataModel.groupName = [resultSet stringForColumn:@"groupName"];
             dataModel.interfaceName = [resultSet stringForColumn:@"interfaceName"];
             dataModel.interfacePrefixUrl = [resultSet stringForColumn:@"interfacePrefixUrl"];
             dataModel.interfacePath = [resultSet stringForColumn:@"interfacePath"];
@@ -59,7 +60,8 @@
     BOOL isSuccess = NO;
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-        isSuccess = [db executeUpdateWithFormat:@"INSERT INTO interface_group (groupName, sequenceId) VALUES('%@',%ld)", self.groupName, self.sequenceId];
+//        isSuccess = [db executeUpdate:@"INSERT INTO interface_group (groupName, sequenceId) VALUES(?,?)", self.groupName, self.sequenceId];
+        isSuccess = [db executeUpdateWithFormat:@"INSERT INTO interface_group (groupName, sequenceId) VALUES(%@,%ld)", self.groupName, self.sequenceId];
     }
     [db close];
     return isSuccess;
@@ -68,7 +70,7 @@
     BOOL isSuccess = NO;
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-        isSuccess = [db executeUpdateWithFormat:@"UPDATE interface_group SET groupName = '%@', sequenceId = %ld WHERE groupId = %ld", self.groupName, self.sequenceId, self.groupId];
+        isSuccess = [db executeUpdateWithFormat:@"UPDATE interface_group SET groupName = %@, sequenceId = %ld WHERE groupId = %ld", self.groupName, self.sequenceId, self.groupId];
     }
     [db close];
     return isSuccess;
@@ -135,9 +137,9 @@
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
         NSMutableString *sql = [NSMutableString stringWithFormat:@"UPDATE interface SET groupId = %ld", self.groupId];
-        [sql appendFormat:@",interfaceName = '%@'", self.interfaceName];
-        [sql appendFormat:@",interfacePrefixUrl = '%@'", self.interfacePrefixUrl];
-        [sql appendFormat:@",interfacePath = '%@'", self.interfacePath];
+        [sql appendFormat:@",interfaceName = %@", self.interfaceName];
+        [sql appendFormat:@",interfacePrefixUrl = %@", self.interfacePrefixUrl];
+        [sql appendFormat:@",interfacePath = %@", self.interfacePath];
         [sql appendFormat:@",interfaceRemark = '%@'", self.interfaceRemark];
         [sql appendFormat:@",interfaceRequestType = %ld", self.interfaceRequestType];
         [sql appendFormat:@",interfaceStatus = %ld", self.interfaceStatus];
@@ -174,7 +176,7 @@
     BOOL isSuccess = NO;
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-        isSuccess = [db executeUpdateWithFormat:@"INSERT INTO test_case (interfaceId, caseInput, caseOutput, caseOutputType, caseOutputModel, sequenceId, caseStatus, spendTime) VALUES(%ld, '%@', '%@', %ld, '%@', %ld, %ld, %ld)", self.interfaceId, self.caseInput, self.caseOutput, self.caseOutputType, self.caseOutputModel, self.sequenceId, self.caseStatus, self.spendTime];
+        isSuccess = [db executeUpdateWithFormat:@"INSERT INTO test_case (interfaceId, caseInput, caseOutput, caseOutputType, caseOutputModel, sequenceId, caseStatus, spendTime) VALUES(%ld, %@, %@, %ld, %@, %ld, %ld, %ld)", self.interfaceId, self.caseInput, self.caseOutput, self.caseOutputType, self.caseOutputModel, self.sequenceId, self.caseStatus, self.spendTime];
     }
     [db close];
     return isSuccess;
@@ -183,7 +185,7 @@
     BOOL isSuccess = NO;
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-        isSuccess = [db executeUpdateWithFormat:@"UPDATE test_case SET interfaceId = %ld, caseInput = '%@', caseOutput = '%@', caseOutputType = %ld, caseOutputModel = '%@', sequenceId = %ld, caseStatus = %ld, spendTime = %ld WHERE caseId = %ld",self.interfaceId, self.caseInput, self.caseOutput, self.caseOutputType, self.caseOutputModel, self.sequenceId, self.caseStatus, self.spendTime, self.caseId];
+        isSuccess = [db executeUpdateWithFormat:@"UPDATE test_case SET interfaceId = %ld, caseInput = %@, caseOutput = %@, caseOutputType = %ld, caseOutputModel = %@, sequenceId = %ld, caseStatus = %ld, spendTime = %ld WHERE caseId = %ld",self.interfaceId, self.caseInput, self.caseOutput, self.caseOutputType, self.caseOutputModel, self.sequenceId, self.caseStatus, self.spendTime, self.caseId];
     }
     [db close];
     return isSuccess;

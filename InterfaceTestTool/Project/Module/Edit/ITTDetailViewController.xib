@@ -12,6 +12,7 @@
                 <outlet property="caseOutputStdTextView" destination="qqq-6F-bHk" id="Kgg-76-1gf"/>
                 <outlet property="caseOutputTextView" destination="7yf-dl-MpE" id="kgf-dj-Q6d"/>
                 <outlet property="caseOutputTypeSegment" destination="gx1-p6-lCG" id="dsh-Tc-NyA"/>
+                <outlet property="interfaceGroupLabel" destination="Drx-v6-PXQ" id="N0j-Di-uDj"/>
                 <outlet property="interfaceNameTextField" destination="AIv-VD-Q9g" id="pI8-51-To6"/>
                 <outlet property="interfacePathTextField" destination="mII-Qp-gkB" id="g8X-2i-ofU"/>
                 <outlet property="interfacePrefixTextField" destination="qEQ-SX-Nhj" id="EoL-Xo-AUF"/>
@@ -21,7 +22,7 @@
                 <outlet property="saveTestCaseButton" destination="Jb3-pM-zvR" id="SGy-uD-9Ew"/>
                 <outlet property="sequenceIdTextField" destination="kgF-ei-YCc" id="ZOv-3h-qQg"/>
                 <outlet property="statusSwitch" destination="AXY-HN-GsQ" id="bED-Hb-9jU"/>
-                <outlet property="tableView" destination="51e-QB-ITD" id="Lvf-Q6-Pvh"/>
+                <outlet property="testCaseTableView" destination="51e-QB-ITD" id="N3J-1w-Ipt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -202,6 +203,19 @@
                                         <action selector="saveTestCaseButtonClicked:" destination="-1" eventType="touchUpInside" id="HSN-Eh-8Td"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="分组：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEP-ma-fDB">
+                                    <rect key="frame" x="8" y="191" width="100" height="26"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="分组设置" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drx-v6-PXQ">
+                                    <rect key="frame" x="116" y="183" width="228" height="41"/>
+                                    <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>

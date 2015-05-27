@@ -36,6 +36,7 @@
 @interface InterfaceModel : BaseDataModel
 @property (nonatomic, assign) NSInteger interfaceId;        //接口id
 @property (nonatomic, assign) NSInteger groupId;            //分组id
+@property (nonatomic, strong) NSString *groupName;            //分组id
 @property (nonatomic, strong) NSString *interfaceName;      //接口名称
 @property (nonatomic, strong) NSString *interfacePrefixUrl; //空-就为默认 非空-个性化定制
 @property (nonatomic, strong) NSString *interfacePath;      //接口地址
@@ -67,5 +68,9 @@
 @property (nonatomic, assign) NSInteger sequenceId;         //排序编号
 @property (nonatomic, assign) NSInteger caseStatus;         //0-未测试 1-测试中 2-网络不通 3-字段不完整 9-字段完整
 @property (nonatomic, assign) NSInteger spendTime;          //花费的时间(毫秒)
+
+- (BOOL)addToDB;            //添加
+- (BOOL)saveToDB;           //更新
+- (BOOL)deleteFromDB;       //删除
 @end
 

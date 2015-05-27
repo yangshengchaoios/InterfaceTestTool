@@ -12,6 +12,8 @@
 		7E6D3C2E1AEDF5DB0086C2FB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E6D3C2D1AEDF5DB0086C2FB /* Images.xcassets */; };
 		7E6D3C3D1AEDF5DB0086C2FB /* InterfaceTestToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D3C3C1AEDF5DB0086C2FB /* InterfaceTestToolTests.m */; };
 		86758664F6BBCF2EF0624E9B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2F60110072CA76D6E5711 /* libPods.a */; };
+		D30C56F51B15B03200C570FB /* ITTGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30C56F31B15B03200C570FB /* ITTGroupViewController.m */; };
+		D30C56F61B15B03200C570FB /* ITTGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D30C56F41B15B03200C570FB /* ITTGroupViewController.xib */; };
 		D384BFEE1B05CED100FB5972 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D384BEA21B05CED100FB5972 /* DataModel.m */; };
 		D384BFEF1B05CED100FB5972 /* RegionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D384BEA41B05CED100FB5972 /* RegionModel.m */; };
 		D384BFF11B05CED100FB5972 /* NSArray+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D384BEB31B05CED100FB5972 /* NSArray+Addition.m */; };
@@ -260,6 +262,9 @@
 		7E6D3C3B1AEDF5DB0086C2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E6D3C3C1AEDF5DB0086C2FB /* InterfaceTestToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceTestToolTests.m; sourceTree = "<group>"; };
 		C6B7B47E6FE29CEF364AB720 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D30C56F21B15B03200C570FB /* ITTGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTGroupViewController.h; sourceTree = "<group>"; };
+		D30C56F31B15B03200C570FB /* ITTGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTGroupViewController.m; sourceTree = "<group>"; };
+		D30C56F41B15B03200C570FB /* ITTGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ITTGroupViewController.xib; sourceTree = "<group>"; };
 		D384BE9C1B05CED100FB5972 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D384BE9D1B05CED100FB5972 /* EnumType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumType.h; sourceTree = "<group>"; };
 		D384BE9F1B05CED100FB5972 /* UrlConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlConstants.h; sourceTree = "<group>"; };
@@ -1416,6 +1421,9 @@
 				D3D74A4E1B133B5F0078BD40 /* ITTDetailTableViewCell.h */,
 				D3D74A4F1B133B5F0078BD40 /* ITTDetailTableViewCell.m */,
 				D3D74A501B133B5F0078BD40 /* ITTDetailTableViewCell.xib */,
+				D30C56F21B15B03200C570FB /* ITTGroupViewController.h */,
+				D30C56F31B15B03200C570FB /* ITTGroupViewController.m */,
+				D30C56F41B15B03200C570FB /* ITTGroupViewController.xib */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -1740,6 +1748,7 @@
 				D384C05E1B05CED100FB5972 /* ZSSrightjustify.png in Resources */,
 				D384C03F1B05CED100FB5972 /* ZSSh5@2x.png in Resources */,
 				D384C0081B05CED100FB5972 /* KLSwitch_icon_lock@2x.png in Resources */,
+				D30C56F61B15B03200C570FB /* ITTGroupViewController.xib in Resources */,
 				D384C0EF1B05D53000FB5972 /* UMSCommentInputControlleriPad.xib in Resources */,
 				D384C0471B05CED100FB5972 /* ZSSindent@2x.png in Resources */,
 				D384C0531B05CED100FB5972 /* ZSSorderedlist@2x.png in Resources */,
@@ -1941,6 +1950,7 @@
 				D384C09F1B05CED100FB5972 /* TitleBarView.m in Sources */,
 				D384C09A1B05CED100FB5972 /* PageScrollView.m in Sources */,
 				D384C0281B05CED100FB5972 /* XHImageViewer.m in Sources */,
+				D30C56F51B15B03200C570FB /* ITTGroupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

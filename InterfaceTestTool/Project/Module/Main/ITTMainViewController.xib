@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5sc-N9-fU4">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <rect key="frame" x="0.0" y="44" width="768" height="980"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
@@ -26,7 +26,7 @@
                 <constraint firstItem="5sc-N9-fU4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jtb-qr-icz"/>
                 <constraint firstAttribute="bottom" secondItem="5sc-N9-fU4" secondAttribute="bottom" id="ROF-um-8ow"/>
                 <constraint firstAttribute="trailing" secondItem="5sc-N9-fU4" secondAttribute="trailing" id="ej1-by-Vwv"/>
-                <constraint firstItem="5sc-N9-fU4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="thn-I6-Dxm"/>
+                <constraint firstItem="5sc-N9-fU4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="thn-I6-Dxm"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
             <point key="canvasLocation" x="149" y="327"/>

@@ -26,4 +26,10 @@
     [self.interfaceGroupArray addObjectsFromArray:[InterfaceGroupModel FetchGroups]];
 }
 
+- (void)refreshInterfaces {
+    for (InterfaceGroupModel *group in self.interfaceGroupArray) {
+        [group initInterfaceArray];
+    }
+}
+
 @end
