@@ -77,7 +77,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I0S-le-rzE">
-                    <rect key="frame" x="45" y="123" width="325" height="361"/>
+                    <rect key="frame" x="45" y="123" width="325" height="776"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>

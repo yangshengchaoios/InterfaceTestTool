@@ -81,7 +81,9 @@
     NSString *tablesql_interface_group = @"CREATE TABLE IF NOT EXISTS interface_group (\
     groupId INTEGER PRIMARY KEY AUTOINCREMENT,\
     groupName Text DEFAULT NULL,\
-    sequenceId Integer DEFAULT 0)";
+    sequenceId Integer DEFAULT 0 \
+    ,CONSTRAINT [PK_interface_group] UNIQUE ([groupName] ASC)\
+    )";
     [CommonUtils SqliteUpdate:tablesql_interface_group];
     //接口定义
     NSString *tablesql_Interface = @"CREATE TABLE IF NOT EXISTS interface (\
@@ -97,7 +99,9 @@
     totalCaseNumber Integer DEFAULT 0,\
     successCaseNumber Integer DEFAULT 0,\
     partialCaseNumber Integer DEFAULT 0,\
-    errorCaseNumber Integer DEFAULT 0)";
+    errorCaseNumber Integer DEFAULT 0 \
+    ,CONSTRAINT [PK_interface] UNIQUE ([interfacePath] ASC)\
+    )";
     [CommonUtils SqliteUpdate:tablesql_Interface];
     //测试用例
     NSString *tablesql_TestCase = @"CREATE TABLE IF NOT EXISTS test_case (\
@@ -110,7 +114,9 @@
     caseOutputModel Varchar(100) DEFAULT NULL,\
     sequenceId Integer DEFAULT 0,\
     caseStatus Integer DEFAULT 0,\
-    spendTime Integer DEFAULT 0)";
+    spendTime Integer DEFAULT 0 \
+    ,CONSTRAINT [PK_test_case] UNIQUE ([interfaceId] ASC, [caseInput] ASC) \
+    )";
     [CommonUtils SqliteUpdate:tablesql_TestCase];
 }
 

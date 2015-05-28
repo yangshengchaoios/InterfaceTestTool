@@ -24,27 +24,30 @@
     [self.tableView registerNib:[ITTMainTableViewCell NibNameOfCell] forCellReuseIdentifier:kCellIdentifier];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0.01)];
-//    self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.backgroundColor = [UIColor blueColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:[self edgeInsetsOfCellSeperator]];
     }
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [self.tableView setLayoutMargins:[self edgeInsetsOfCellSeperator]];
     }
-    [self.tableView addHeaderWithCallback:^{
+    [self.tableView addLegendHeaderWithRefreshingBlock:^{
         [[ITTManager sharedInstance] refreshInterfaceGroups];
         [[ITTManager sharedInstance] refreshInterfaces];
+        [blockSelf.tableView.header endRefreshing];
         [blockSelf.tableView reloadData];
     }];
-    [self.tableView headerBeginRefreshing];
+    [self.tableView.header beginRefreshing];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"添加" style:UIBarButtonItemStyleBordered handler:^(id sender) {
-        [blockSelf pushViewController:@"ITTDetailViewController" withParams:@{kParamTitle : @"添加接口", kParamType : kParamAdd}];
+        [blockSelf pushViewController:@"ITTDetailViewController" withParams:@{kParamTitle : @"添加接口"}];
     }];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"开启测试" style:UIBarButtonItemStyleBordered handler:^(id sender) {
+        //TODO:start test
+    }];
 }
 
 - (UIEdgeInsets)edgeInsetsOfCellSeperator {
@@ -61,7 +64,7 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     InterfaceGroupModel *groupModel = [ITTManager sharedInstance].interfaceGroupArray[section];
-    return groupModel.groupName;
+    return [NSString stringWithFormat:@"    %@", groupModel.groupName];
 }
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     ((UITableViewHeaderFooterView *)view).contentView.backgroundColor = [UIColor lightGrayColor];
@@ -86,7 +89,6 @@
     InterfaceModel *interface = groupModel.interfaceArray[indexPath.row];
     [self pushViewController:@"ITTDetailViewController"
                   withParams:@{kParamTitle : [NSString stringWithFormat:@"修改接口-%@", Trim(interface.interfaceName)],
-                               kParamType : kParamEdit,
                                kParamModel : interface}];
 }
 

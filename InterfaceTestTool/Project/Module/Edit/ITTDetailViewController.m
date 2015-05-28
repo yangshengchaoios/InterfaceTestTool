@@ -13,28 +13,27 @@
 
 //interface
 @property (nonatomic, weak) IBOutlet UISwitch *statusSwitch;    //是否开启测试
+@property (nonatomic, weak) IBOutlet UISwitch *requestSwitch;    //是否为POST
 @property (nonatomic, weak) IBOutlet UITextField *interfaceNameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *interfacePathTextField;
 @property (nonatomic, weak) IBOutlet UITextField *interfacePrefixTextField;
 @property (nonatomic, weak) IBOutlet UITextField *sequenceIdTextField;
 @property (nonatomic, weak) IBOutlet UITextField *interfaceRemarkTextField;
 @property (nonatomic, weak) IBOutlet UILabel *interfaceGroupLabel;
-@property (nonatomic, weak) IBOutlet UIButton *saveInterfaceButton;
 
 //test case
+@property (nonatomic, weak) IBOutlet UILabel *testCaseTitleLabel;
 @property (nonatomic, weak) IBOutlet UITableView *testCaseTableView;
 @property (nonatomic, weak) IBOutlet UITextView *caseOutputTextView;
 @property (nonatomic, weak) IBOutlet UITextView *caseInputTextView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *caseOutputTypeSegment;
 @property (nonatomic, weak) IBOutlet UITextField *caseOutputModelTextField;
 @property (nonatomic, weak) IBOutlet UITextView *caseOutputStdTextView;
-@property (nonatomic, weak) IBOutlet UIButton *saveTestCaseButton;
-@property (nonatomic, weak) IBOutlet UIButton *runTestCaseButton;
 
 @property (nonatomic, strong) InterfaceModel *interfaceModel;
 @property (nonatomic, copy) NSString *interfaceType;//add edit
-@property (nonatomic, strong) NSString *testCaseType;//add edit
 @property (nonatomic, strong) InterfaceGroupModel *currentGroupModel;
+@property (nonatomic, strong) TestCaseModel *currentTestCase;
 
 @end
 
@@ -42,18 +41,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initTestCaseTableView];
+    
+    //初始化数据
     WeakSelfType blockSelf = self;
     self.interfaceModel = [InterfaceModel new];
     self.currentGroupModel = [InterfaceGroupModel new];
-    self.interfaceType = self.params[kParamType];
-    if ([kParamEdit isEqualToString:self.interfaceType]) {
+    if (self.params[kParamModel]) {
+        self.interfaceType = kParamEdit;
         self.interfaceModel = self.params[kParamModel];
         self.currentGroupModel.groupId = self.interfaceModel.groupId;
         self.currentGroupModel.groupName = self.interfaceModel.groupName;
-        NSAssert(self.interfaceModel, @"编辑状态下没有传递选中的model过来");
+    }
+    else {
+        self.interfaceType = kParamAdd;
     }
     [self layoutInterface];
-    [self initTestCaseTableView];
+    [self refreshTestCases];
     
     //点击选择接口分组
     self.interfaceGroupLabel.userInteractionEnabled = YES;
@@ -63,10 +67,18 @@
         params[kParamGroupId] = @(blockSelf.currentGroupModel.groupId);
         params[kParamCallBackBlock] = ^(InterfaceGroupModel *groupModel) {
             blockSelf.currentGroupModel = groupModel;
-            [blockSelf layoutCurrentGroup];
+            blockSelf.interfaceGroupLabel.text = blockSelf.currentGroupModel.groupName;
         };
         [blockSelf pushViewController:@"ITTGroupViewController" withParams:params];
     }];
+}
+
+- (void)refreshTestCases {
+    [self.interfaceModel initTestCaseArray];
+    [self.testCaseTableView reloadData];
+    self.testCaseTitleLabel.text = [NSString stringWithFormat:@"测试用例(%ld)", [self.interfaceModel.testCaseArray count]];
+    self.currentTestCase = nil;
+    [self layoutTestCase];
 }
 
 //初始化测试用例的列表
@@ -88,17 +100,32 @@
 //显示当前接口信息
 - (void)layoutInterface {
     self.statusSwitch.on = self.interfaceModel.interfaceStatus;
+    self.requestSwitch.on = self.interfaceModel.interfaceRequestType;
     self.interfaceNameTextField.text = Trim(self.interfaceModel.interfaceName);
     self.interfacePathTextField.text = Trim(self.interfaceModel.interfacePath);
     self.interfacePrefixTextField.text = Trim(self.interfaceModel.interfacePrefixUrl);
     self.sequenceIdTextField.text = [NSString stringWithFormat:@"%ld", self.interfaceModel.sequenceId];
     self.interfaceRemarkTextField.text = Trim(self.interfaceModel.interfaceRemark);
-    [self layoutCurrentGroup];
+    self.interfaceGroupLabel.text = Trim(self.interfaceModel.groupName);
+    self.interfaceGroupLabel.text = self.currentGroupModel.groupName;
 }
 
-//显示当前选择的组
-- (void)layoutCurrentGroup {
-    self.interfaceGroupLabel.text = self.currentGroupModel.groupName;
+//显示当前的测试用例
+- (void)layoutTestCase {
+    if (nil == self.currentTestCase) {
+        self.caseInputTextView.text = nil;
+        self.caseOutputTypeSegment.selectedSegmentIndex = 0;
+        self.caseOutputModelTextField.text = nil;
+        self.caseOutputStdTextView.text = nil;
+        self.caseOutputTextView.text = nil;
+    }
+    else {
+        self.caseInputTextView.text = self.currentTestCase.caseInput;
+        self.caseOutputTypeSegment.selectedSegmentIndex = self.currentTestCase.caseOutputType;
+        self.caseOutputModelTextField.text = Trim(self.currentTestCase.caseOutputModel);
+        self.caseOutputStdTextView.text = Trim(self.currentTestCase.caseOutputStd);
+        self.caseOutputTextView.text = Trim(self.currentTestCase.caseOutput);
+    }
 }
 
 
@@ -112,6 +139,7 @@
     
     //
     self.interfaceModel.interfaceStatus = self.statusSwitch.isOn;
+    self.interfaceModel.interfaceRequestType = self.requestSwitch.isOn;
     self.interfaceModel.interfaceName = Trim(self.interfaceNameTextField.text);
     self.interfaceModel.interfacePath = Trim(self.interfacePathTextField.text);
     self.interfaceModel.interfacePrefixUrl = Trim(self.interfacePrefixTextField.text);
@@ -136,6 +164,33 @@
             [self showAlertVieWithMessage:@"修改失败！"];
         }
     }
+}
+
+//添加测试用例
+- (IBAction)addTestCaseButtonClicked:(id)sender {
+    self.currentTestCase = nil;
+    [self layoutTestCase];
+}
+//删除测试用例
+- (IBAction)deleteTestCaseButtonClicked:(id)sender {
+    if (nil == self.currentTestCase) {
+        [self showResultThenHide:@"请先选择测试用例"];
+        return;
+    }
+    WeakSelfType blockSelf = self;
+    UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"确定要删除该用例！"];
+    [alertView bk_addButtonWithTitle:@"删除" handler:^{
+        [blockSelf showHUDLoading:@"正在删除"];
+        if ([blockSelf.currentTestCase deleteFromDB]) {
+            [blockSelf showResultThenHide:@"删除成功"];
+            [blockSelf refreshTestCases];
+        }
+        else {
+            [blockSelf showResultThenHide:@"删除失败"];
+        }
+    }];
+    [alertView bk_setCancelButtonWithTitle:@"取消" handler:nil];
+    [alertView show];
 }
 //保存测试用例
 - (IBAction)saveTestCaseButtonClicked:(id)sender {
@@ -180,13 +235,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.testCaseType = @"edit";
-    TestCaseModel *testCase = self.interfaceModel.testCaseArray[indexPath.row];
-    self.caseOutputTextView.text = testCase.caseOutput;
-    self.caseInputTextView.text = testCase.caseInput;
-    self.caseOutputTypeSegment.selectedSegmentIndex = testCase.caseOutputType;
-    self.caseOutputModelTextField.text = testCase.caseOutputModel;
-    self.caseOutputStdTextView.text = testCase.caseOutputStd;
+    self.currentTestCase = self.interfaceModel.testCaseArray[indexPath.row];
+    [self layoutTestCase];
 }
 
 @end

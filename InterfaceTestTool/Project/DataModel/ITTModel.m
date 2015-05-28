@@ -26,6 +26,10 @@
     return groupArray;
 }
 - (void)initInterfaceArray {
+    if (0 == self.groupId) {
+        return;
+    }
+    
     if (nil == self.interfaceArray) {
         self.interfaceArray = [NSMutableArray array];
     }
@@ -39,7 +43,7 @@
             InterfaceModel *dataModel = [InterfaceModel new];
             dataModel.interfaceId = [resultSet intForColumn:@"interfaceId"];
             dataModel.groupId = [resultSet intForColumn:@"groupId"];
-            dataModel.groupName = [resultSet stringForColumn:@"groupName"];
+            dataModel.groupName = Trim(self.groupName);
             dataModel.interfaceName = [resultSet stringForColumn:@"interfaceName"];
             dataModel.interfacePrefixUrl = [resultSet stringForColumn:@"interfacePrefixUrl"];
             dataModel.interfacePath = [resultSet stringForColumn:@"interfacePath"];
@@ -97,6 +101,10 @@
 
 @implementation InterfaceModel
 - (void)initTestCaseArray {
+    if (0 == self.interfaceId) {
+        return;
+    }
+    
     if (nil == self.testCaseArray) {
         self.testCaseArray = [NSMutableArray array];
     }
@@ -127,7 +135,7 @@
     BOOL isSuccess = NO;
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-        isSuccess = [db executeUpdateWithFormat:@"INSERT INTO interface (groupId, interfaceName, interfacePrefixUrl, interfacePath, interfaceRemark, interfaceRequestType) VALUES(%ld,'%@','%@','%@','%@',%ld)", self.groupId, self.interfaceName, self.interfacePrefixUrl, self.interfacePath, self.interfaceRemark, self.interfaceRequestType];
+        isSuccess = [db executeUpdateWithFormat:@"INSERT INTO interface (groupId, interfaceName, interfacePrefixUrl, interfacePath, interfaceRemark, interfaceRequestType) VALUES(%ld, %@, %@, %@, %@,%ld)", self.groupId, self.interfaceName, self.interfacePrefixUrl, self.interfacePath, self.interfaceRemark, self.interfaceRequestType];
     }
     [db close];
     return isSuccess;
@@ -137,10 +145,14 @@
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
         NSMutableString *sql = [NSMutableString stringWithFormat:@"UPDATE interface SET groupId = %ld", self.groupId];
-        [sql appendFormat:@",interfaceName = %@", self.interfaceName];
-        [sql appendFormat:@",interfacePrefixUrl = %@", self.interfacePrefixUrl];
-        [sql appendFormat:@",interfacePath = %@", self.interfacePath];
-        [sql appendFormat:@",interfaceRemark = '%@'", self.interfaceRemark];
+        [sql appendFormat:@",interfaceName = '%@'", self.interfaceName];
+        if ([NSString isNotEmpty:self.interfacePrefixUrl]) {
+            [sql appendFormat:@",interfacePrefixUrl = '%@'", self.interfacePrefixUrl];
+        }
+        if ([NSString isNotEmpty:self.interfaceRemark]) {
+            [sql appendFormat:@",interfaceRemark = '%@'", self.interfaceRemark];
+        }
+        [sql appendFormat:@",interfacePath = '%@'", self.interfacePath];
         [sql appendFormat:@",interfaceRequestType = %ld", self.interfaceRequestType];
         [sql appendFormat:@",interfaceStatus = %ld", self.interfaceStatus];
         [sql appendFormat:@",sequenceId = %ld", self.sequenceId];

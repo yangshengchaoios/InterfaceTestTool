@@ -234,6 +234,7 @@
 #define kParamSpecialSaleId                 @"specialSaleId"
 #define kParamSimpleSpecialSaleModel        @"simpleSpecialSaleModel"
 #define kParamGroupId                       @"groupId"
+#define kParamGroupName                     @"groupName"
 #define kParamGroupBuyEndTime               @"groupBuyEndTime"
 #define kParamSelectedSkuId                 @"selectedSkuId"
 #define kParamUsed                          @"used"

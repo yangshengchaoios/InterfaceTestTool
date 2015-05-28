@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, copy) CallBackWithResponseBlock callBackBlock;
 @property (nonatomic, strong) InterfaceGroupModel *selectedGroup;
+@property (nonatomic, assign) NSInteger groupId;
 
 @end
 
@@ -25,9 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.groupId = [self.params[kParamGroupId] integerValue];
     self.callBackBlock = self.params[kParamCallBackBlock];
     self.selectedGroup = [InterfaceGroupModel new];
-    self.selectedGroup.groupId = [self.params[kParamGroupId] integerValue];
     
     [self initTableView];
     [self layoutGroupInfo];
@@ -93,29 +94,36 @@
         return;
     }
     
-    [self showHUDLoading:@"正在删除"];
-    if ([self.selectedGroup deleteFromDB]) {
-        [self showResultThenHide:@"删除成功"];
-        self.selectedGroup = [InterfaceGroupModel new];
-        [self refreshGroups];
-    }
-    else {
-        [self showResultThenHide:@"删除失败"];
-    }
+    WeakSelfType blockSelf = self;
+    UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"确定要删除该组！"];
+    [alertView bk_addButtonWithTitle:@"删除" handler:^{
+        [blockSelf showHUDLoading:@"正在删除"];
+        if ([blockSelf.selectedGroup deleteFromDB]) {
+            [blockSelf showResultThenHide:@"删除成功"];
+            blockSelf.selectedGroup = [InterfaceGroupModel new];
+            [blockSelf refreshGroups];
+        }
+        else {
+            [blockSelf showResultThenHide:@"删除失败"];
+        }
+    }];
+    [alertView bk_setCancelButtonWithTitle:@"取消" handler:nil];
+    [alertView show];
 }
 
 - (IBAction)saveButtonClicked:(id)sender {
     NSString *groupName = Trim(self.groupNameTextField.text);
     CheckIfEmpty(groupName, @"请先输入分组名称");
-    if ([CommonUtils SqliteCheckIfExists:[NSString stringWithFormat:@"SELECT 1 FROM interface_group WHERE groupName = '%@'", groupName]]) {
-        [self showResultThenHide:[NSString stringWithFormat:@"分组名称[%@]已经存在", groupName]];
-        return;
-    }
-    
     [self showHUDLoading:@"正在保存"];
     self.selectedGroup.groupName = groupName;
     self.selectedGroup.sequenceId = [self.groupSequenceIdTextField.text integerValue];
     if (0 == self.selectedGroup.groupId) {
+        //NOTE:添加了unique约束后，下面的判断就没必要了
+//        if ([CommonUtils SqliteCheckIfExists:[NSString stringWithFormat:@"SELECT 1 FROM interface_group WHERE groupName = '%@'", groupName]]) {
+//            [self showResultThenHide:[NSString stringWithFormat:@"分组名称[%@]已经存在", groupName]];
+//            return;
+//        }
+        
         if ([self.selectedGroup addToDB]) {
             [self showResultThenHide:@"添加成功"];
             [self refreshGroups];
@@ -147,16 +155,21 @@
     return [self.dataArray count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return AUTOLAYOUT_LENGTH(80);
+    return AUTOLAYOUT_LENGTH(60);
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YSCTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     InterfaceGroupModel *groupModel = self.dataArray[indexPath.row];
-    if (self.selectedGroup.groupId == groupModel.groupId) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    if (self.selectedGroup.groupId > 0) {
+        if (self.selectedGroup.groupId == groupModel.groupId) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
     }
     else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        if (self.groupId == groupModel.groupId) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
     }
     cell.subtitleLeftTitleLabel.text = groupModel.groupName;
     return cell;
@@ -173,6 +186,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedGroup = self.dataArray[indexPath.row];
     [self layoutGroupInfo];
+    [tableView reloadData];
 }
 
 @end
