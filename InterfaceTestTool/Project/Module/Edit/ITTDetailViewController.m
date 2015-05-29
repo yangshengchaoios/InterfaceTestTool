@@ -151,6 +151,7 @@
     if ([kParamAdd isEqualToString:self.interfaceType]) {
         if ([self.interfaceModel addToDB]) {
             [self showResultThenHide:@"添加成功"];
+            self.interfaceModel = [InterfaceModel CreateNewInterfaceModel:[NSString stringWithFormat:@"SELECT * FROM interface WHERE interfacePath='%@'", Trim(self.interfacePathTextField.text)]];
         }
         else {
             [self showAlertVieWithMessage:@"添加失败！"];
@@ -194,11 +195,38 @@
 }
 //保存测试用例
 - (IBAction)saveTestCaseButtonClicked:(id)sender {
-    if ([kParamAdd isEqualToString:self.interfaceType]) {
-        //TODO:添加新的测试用例
+    if (self.caseOutputTypeSegment.selectedSegmentIndex != 2) {
+        CheckIfEmpty(Trim(self.caseOutputModelTextField.text), @"输出model不能为空");
+    }
+    BOOL isAdd = NO;
+    if (nil == self.currentTestCase) {
+        self.currentTestCase = [TestCaseModel new];
+        self.currentTestCase.interfaceId = self.interfaceModel.interfaceId;
+        isAdd = YES;
+    }
+    self.currentTestCase.caseInput = Trim(self.caseInputTextView.text);
+    self.currentTestCase.caseOutputType = self.caseOutputTypeSegment.selectedSegmentIndex;
+    self.currentTestCase.caseOutputModel = Trim(self.caseOutputModelTextField.text);
+    self.currentTestCase.caseOutputStd = Trim(self.caseOutputStdTextView.text);
+    self.currentTestCase.caseOutput = Trim(self.caseOutputTextView.text);
+    
+    if (isAdd) {
+        if ([self.currentTestCase addToDB]) {
+            [self showResultThenHide:@"添加成功"];
+            [self refreshTestCases];
+        }
+        else {
+            [self showResultThenHide:@"添加失败"];
+        }
     }
     else {
-        //TODO:保存测试用例信息
+        if ([self.currentTestCase saveToDB]) {
+            [self showResultThenHide:@"修改成功"];
+            [self refreshTestCases];
+        }
+        else {
+            [self showResultThenHide:@"修改失败"];
+        }
     }
 }
 //启动测试

@@ -50,6 +50,7 @@
 @property (nonatomic, assign) NSInteger errorCaseNumber;    //没有通过测试的用例个数
 
 @property (nonatomic, strong) NSMutableArray *testCaseArray;//接口对应的测试用例数组
++ (instancetype)CreateNewInterfaceModel:(NSString *)sql;
 - (void)initTestCaseArray;
 - (BOOL)addToDB;            //添加
 - (BOOL)saveToDB;           //更新

@@ -64,7 +64,6 @@
     BOOL isSuccess = NO;
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-//        isSuccess = [db executeUpdate:@"INSERT INTO interface_group (groupName, sequenceId) VALUES(?,?)", self.groupName, self.sequenceId];
         isSuccess = [db executeUpdateWithFormat:@"INSERT INTO interface_group (groupName, sequenceId) VALUES(%@,%ld)", self.groupName, self.sequenceId];
     }
     [db close];
@@ -100,6 +99,31 @@
 @end
 
 @implementation InterfaceModel
++ (instancetype)CreateNewInterfaceModel:(NSString *)sql {
+    InterfaceModel *dataModel = nil;
+    FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
+    if ([db open]) {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next]) {
+            dataModel = [InterfaceModel new];
+            dataModel.interfaceId = [resultSet intForColumn:@"interfaceId"];
+            dataModel.groupId = [resultSet intForColumn:@"groupId"];
+            dataModel.interfaceName = [resultSet stringForColumn:@"interfaceName"];
+            dataModel.interfacePrefixUrl = [resultSet stringForColumn:@"interfacePrefixUrl"];
+            dataModel.interfacePath = [resultSet stringForColumn:@"interfacePath"];
+            dataModel.interfaceRemark = [resultSet stringForColumn:@"interfaceRemark"];
+            dataModel.interfaceRequestType = [resultSet intForColumn:@"interfaceRequestType"];
+            dataModel.interfaceStatus = [resultSet intForColumn:@"interfaceStatus"];
+            dataModel.sequenceId = [resultSet intForColumn:@"sequenceId"];
+            dataModel.totalCaseNumber = [resultSet intForColumn:@"totalCaseNumber"];
+            dataModel.successCaseNumber = [resultSet intForColumn:@"successCaseNumber"];
+            dataModel.partialCaseNumber = [resultSet intForColumn:@"partialCaseNumber"];
+            dataModel.errorCaseNumber = [resultSet intForColumn:@"errorCaseNumber"];
+        }
+    }
+    [db close];
+    return dataModel;
+}
 - (void)initTestCaseArray {
     if (0 == self.interfaceId) {
         return;
@@ -113,7 +137,7 @@
     }
     FMDatabase *db = [FMDatabase databaseWithPath:DBRealPath];
     if ([db open]) {
-        FMResultSet *resultSet = [db executeQueryWithFormat:@"SELECT * FROM test_case WHERE interfaceId = %ld ORDER BY sequenceId ASC", self.interfaceId];
+        FMResultSet *resultSet = [db executeQueryWithFormat:@"SELECT * FROM test_case WHERE interfaceId = %ld ORDER BY caseId ASC", self.interfaceId];
         while ([resultSet next]) {
             TestCaseModel *dataModel = [TestCaseModel new];
             dataModel.caseId = [resultSet intForColumn:@"caseId"];
